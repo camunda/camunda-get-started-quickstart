@@ -15,17 +15,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_1axd8hr" sourceRef="Task_19pt1nu" targetRef="EndEvent_1oyw02k" />
     <bpmn:sequenceFlow id="SequenceFlow_0fn07fk" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_0r349mg" />
     <bpmn:sequenceFlow id="SequenceFlow_0foxe2y" sourceRef="Task_1j42goo" targetRef="ExclusiveGateway_17ik05z" />
-    <bpmn:userTask id="Task_1j42goo" name="Approve Payment" camunda:assignee="demo">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="amount" label="Amount" type="long" />
-          <camunda:formField id="item" label="Item" type="string" />
-          <camunda:formField id="approved" label="Approved?" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0di0jwo</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0foxe2y</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0r349mg" name="Payment Amount?">
       <bpmn:incoming>SequenceFlow_0fn07fk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ilu8bp</bpmn:outgoing>
@@ -51,6 +40,10 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ypgah8" name="No" sourceRef="ExclusiveGateway_17ik05z" targetRef="EndEvent_0fj2aui">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:businessRuleTask id="Task_1j42goo" name="Approve Payment" camunda:resultVariable="approved" camunda:decisionRef="approve-payment" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>SequenceFlow_0di0jwo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0foxe2y</bpmn:outgoing>
+    </bpmn:businessRuleTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="payment-retrieval">
@@ -90,9 +83,6 @@
           <dc:Bounds x="527.5" y="242.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1r7ozpl_di" bpmnElement="Task_1j42goo">
-        <dc:Bounds x="374" y="224" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0r349mg_di" bpmnElement="ExclusiveGateway_0r349mg" isMarkerVisible="true">
         <dc:Bounds x="247" y="95" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -140,6 +130,9 @@
           <dc:Bounds x="665" y="243" width="15" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_1biya6g_di" bpmnElement="Task_1j42goo">
+        <dc:Bounds x="374" y="224" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
