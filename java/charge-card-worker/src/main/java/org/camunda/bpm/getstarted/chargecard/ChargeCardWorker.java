@@ -38,8 +38,8 @@ public class ChargeCardWorker {
 					// Put your business logic here
 
 					// Get a process variable
-					String item = (String) externalTask.getVariable("item");
-					Long amount = (Long) externalTask.getVariable("amount");
+					String item = externalTask.getVariable("item");
+					Integer amount = externalTask.getVariable("amount");
 					LOGGER.info("Charging credit card with an amount of '" + amount + "'€ for the item '" + item + "'...");
 					
 					try {
