@@ -1,4 +1,4 @@
-# Camunda Quick Start - Get Started with Camunda
+# Camunda Quick Start - Get Started with Camunda 7
 
 This repository contains the BPMN process and DMN decision table as well as the example code for the get started guide at [https://docs.camunda.org/get-started/quick-start/](https://docs.camunda.org/get-started/quick-start/).
 
